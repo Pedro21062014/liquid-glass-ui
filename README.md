@@ -1,14 +1,15 @@
-# 🧊 Liquid Glass Apple UI (Pro)
+# 💎 Liquid Glass Apple Pro (Inspira Edition)
 
-A high-end, production-ready React UI library that perfectly replicates Apple's "Liquid Glass" (Glassmorphism) aesthetics.
+A professional-grade UI library that captures the exact physics, aesthetics, and interaction patterns of Apple's high-end design systems.
 
-## ✨ Features
+## ✨ Elite Features
 
-- 💎 **5 Glass Variants**: From `ultra-thin` to `chrome` (high gloss).
-- 🎨 **Smart Coloring**: Presets for `white`, `black`, `blue`, `purple`, and `gold`.
-- 🕹️ **Pro Buttons**: Fully interactive buttons with hover physics and optional glow.
-- 📐 **Highly Flexible**: Control intensity, blur, border, and shadows.
-- 🚀 **Performance**: Optimized with `useMemo` and CSS hardware acceleration.
+- 🍎 **Physics-Based Interactions**: Buttons use custom cubic-beziers (`0.16, 1, 0.3, 1`) for that iconic "organic" Apple feel.
+- 🐚 **Apple Scale Effect**: Hold the button and watch it grow (`activeScale`), exactly like the Control Center and Apple TV icons.
+- 🔲 **Rim Lighting**: Pure CSS "inner-stroke" rim lighting on glass edges for realistic depth.
+- 🎨 **SF Pro Aesthetics**: Tuned for SF Pro typography, letter-spacing, and corner smoothing.
+- 🧊 **6 Glass Variants**: Including the new `vibrant` for high-saturation backgrounds.
+- 📱 **Haptic-Ready**: Touch-friendly events for mobile responsiveness.
 
 ## 📦 Installation
 
@@ -16,78 +17,60 @@ A high-end, production-ready React UI library that perfectly replicates Apple's 
 npm install liquid-glass-apple-ui
 ```
 
-## 🚀 Quick Start
+## 🚀 Pro Usage
 
-### Basic Glass Container
-
-```jsx
-import { LiquidGlass } from 'liquid-glass-apple-ui';
-
-function MyCard() {
-  return (
-    <LiquidGlass variant="normal" color="white" intensity={0.5} style={{ padding: '2rem' }}>
-      <h2>Hello Liquid Glass</h2>
-      <p>Apple-style glassmorphism made easy.</p>
-    </LiquidGlass>
-  );
-}
-```
-
-### Advanced Buttons
+### The "Apple Hold" Button
 
 ```jsx
 import { LiquidButton } from 'liquid-glass-apple-ui';
 
-function App() {
+function ControlCenter() {
   return (
-    <div style={{ display: 'flex', gap: '1rem' }}>
-      <LiquidButton variant="chrome" color="blue" glow>
-        Get Started
-      </LiquidButton>
-      
-      <LiquidButton variant="thin" size="sm">
-        Cancel
-      </LiquidButton>
-      
-      <LiquidButton variant="solid" color="purple">
-        Primary Action
-      </LiquidButton>
-    </div>
+    <LiquidButton 
+      variant="chrome" 
+      color="white" 
+      activeScale={1.1} // Grows significantly when held
+      glow
+    >
+      <FlashlightIcon />
+    </LiquidButton>
   );
 }
 ```
 
-## 🛠 Props Reference
-
-### `<LiquidGlass />`
-
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `variant` | `ultra-thin`, `thin`, `normal`, `thick`, `chrome` | `normal` | Thickness of the glass |
-| `color` | `white`, `black`, `blue`, `purple`, `gold` | `white` | Tint color of the glass |
-| `intensity` | `number` (0 to 1) | `1` | Multiplier for opacity and effects |
-| `borderRadius` | `string` \| `number` | `24px` | Corner radius |
-| `border` | `boolean` | `true` | Show/hide the highlight border |
-| `shadow` | `boolean` | `true` | Show/hide the soft shadow |
-
-### `<LiquidButton />`
-
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `variant` | `GlassVariant` \| `solid` | `normal` | Button style |
-| `color` | `GlassColor` | `white` | Button theme color |
-| `size` | `sm`, `md`, `lg`, `xl` | `md` | Button dimensions |
-| `glow` | `boolean` | `false` | Enable glow effect on hover |
-| `fullWidth`| `boolean` | `false` | Expand to container width |
-
-## 🧪 Development & Customization
-
-You can easily wrap any component with `<LiquidGlass />` to "glassify" it:
+### Pro Containers
 
 ```jsx
-const MyCustomWidget = () => (
-  <LiquidGlass variant="ultra-thin" style={{ padding: '10px' }}>
-    {/* Your content */}
+import { LiquidGlass } from 'liquid-glass-apple-ui';
+
+const Widget = () => (
+  <LiquidGlass 
+    variant="vibrant" 
+    color="blue" 
+    shadow="apple"
+    borderRadius={32}
+  >
+    <div style={{ padding: 24 }}>
+      <h3>Vibrant Content</h3>
+    </div>
   </LiquidGlass>
 );
 ```
+
+## 🛠 Advanced API
+
+### `<LiquidGlass />`
+- `variant`: `ultra-thin` | `thin` | `normal` | `thick` | `chrome` | `vibrant`
+- `shadow`: `none` | `sm` | `md` | `lg` | `apple`
+- `border`: `boolean` (Adds the rim-light effect)
+
+### `<LiquidButton />`
+- `activeScale`: `number` (Default: `1.05`. The growth factor when the button is held/pressed)
+- `variant`: `GlassVariant` | `solid` | `ghost`
+- `size`: `xs` | `sm` | `md` | `lg` | `xl`
+
+## 🎨 Design Principles
+This library follows the **Apple Human Interface Guidelines**:
+1. **Materiality**: Using background blur to provide context.
+2. **Responsiveness**: Immediate visual feedback on touch/click.
+3. **Continuity**: Smooth transitions between states.
