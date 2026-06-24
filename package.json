@@ -1,6 +1,6 @@
 {
-  "name": "@pedro21062014/liquid-glass-ui",
-  "version": "1.0.2",
+  "name": "liquid-glass-apple-ui",
+  "version": "1.0.3",
   "description": "Perfect Liquid Glass UI components for React inspired by Apple",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
