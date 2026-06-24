@@ -1,76 +1,93 @@
-# Liquid Glass UI
+# 🧊 Liquid Glass Apple UI (Pro)
 
-A perfect "Liquid Glass" (glassmorphism) UI library inspired by Apple's aesthetics.
+A high-end, production-ready React UI library that perfectly replicates Apple's "Liquid Glass" (Glassmorphism) aesthetics.
 
-## Installation
+## ✨ Features
+
+- 💎 **5 Glass Variants**: From `ultra-thin` to `chrome` (high gloss).
+- 🎨 **Smart Coloring**: Presets for `white`, `black`, `blue`, `purple`, and `gold`.
+- 🕹️ **Pro Buttons**: Fully interactive buttons with hover physics and optional glow.
+- 📐 **Highly Flexible**: Control intensity, blur, border, and shadows.
+- 🚀 **Performance**: Optimized with `useMemo` and CSS hardware acceleration.
+
+## 📦 Installation
 
 ```bash
-npm install liquid-glass-ui
+npm install liquid-glass-apple-ui
 ```
 
-## Usage
+## 🚀 Quick Start
 
-### LiquidGlass Wrapper
-
-The `LiquidGlass` component provides the container effect.
+### Basic Glass Container
 
 ```jsx
-import { LiquidGlass } from 'liquid-glass-ui';
+import { LiquidGlass } from 'liquid-glass-apple-ui';
+
+function MyCard() {
+  return (
+    <LiquidGlass variant="normal" color="white" intensity={0.5} style={{ padding: '2rem' }}>
+      <h2>Hello Liquid Glass</h2>
+      <p>Apple-style glassmorphism made easy.</p>
+    </LiquidGlass>
+  );
+}
+```
+
+### Advanced Buttons
+
+```jsx
+import { LiquidButton } from 'liquid-glass-apple-ui';
 
 function App() {
   return (
-    <div style={{ background: 'linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)', height: '100vh', padding: '50px' }}>
-      <LiquidGlass blur={20} opacity={0.3} style={{ padding: '40px', maxWidth: '400px' }}>
-        <h1>Glassmorphism Card</h1>
-        <p>This is a beautiful liquid glass effect.</p>
-      </LiquidGlass>
+    <div style={{ display: 'flex', gap: '1rem' }}>
+      <LiquidButton variant="chrome" color="blue" glow>
+        Get Started
+      </LiquidButton>
+      
+      <LiquidButton variant="thin" size="sm">
+        Cancel
+      </LiquidButton>
+      
+      <LiquidButton variant="solid" color="purple">
+        Primary Action
+      </LiquidButton>
     </div>
   );
 }
 ```
 
-### LiquidButton
+## 🛠 Props Reference
 
-Ready-to-use buttons with built-in liquid glass effects.
+### `<LiquidGlass />`
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `variant` | `ultra-thin`, `thin`, `normal`, `thick`, `chrome` | `normal` | Thickness of the glass |
+| `color` | `white`, `black`, `blue`, `purple`, `gold` | `white` | Tint color of the glass |
+| `intensity` | `number` (0 to 1) | `1` | Multiplier for opacity and effects |
+| `borderRadius` | `string` \| `number` | `24px` | Corner radius |
+| `border` | `boolean` | `true` | Show/hide the highlight border |
+| `shadow` | `boolean` | `true` | Show/hide the soft shadow |
+
+### `<LiquidButton />`
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `variant` | `GlassVariant` \| `solid` | `normal` | Button style |
+| `color` | `GlassColor` | `white` | Button theme color |
+| `size` | `sm`, `md`, `lg`, `xl` | `md` | Button dimensions |
+| `glow` | `boolean` | `false` | Enable glow effect on hover |
+| `fullWidth`| `boolean` | `false` | Expand to container width |
+
+## 🧪 Development & Customization
+
+You can easily wrap any component with `<LiquidGlass />` to "glassify" it:
 
 ```jsx
-import { LiquidButton } from 'liquid-glass-ui';
-
-function App() {
-  return (
-    <>
-      <LiquidButton variant="glass">Glass Button</LiquidButton>
-      <LiquidButton variant="primary">Primary</LiquidButton>
-      <LiquidButton variant="secondary" onClick={() => alert('Clicked!')}>
-        Custom Action
-      </LiquidButton>
-    </>
-  );
-}
-```
-
-## Creating Custom Buttons
-
-You can easily extend the `LiquidButton` or create your own using the `LiquidGlass` component as a base.
-
-```jsx
-const MyCustomButton = ({ children }) => (
-  <LiquidGlass blur={10} style={{ padding: '8px 16px', cursor: 'pointer', borderRadius: '8px' }}>
-    {children}
+const MyCustomWidget = () => (
+  <LiquidGlass variant="ultra-thin" style={{ padding: '10px' }}>
+    {/* Your content */}
   </LiquidGlass>
 );
 ```
-
-## Props
-
-### LiquidGlass
-- `blur`: number (default: 16)
-- `opacity`: number (default: 0.2)
-- `borderOpacity`: number (default: 0.3)
-- `className`: string
-- `style`: CSSProperties
-
-### LiquidButton
-- `variant`: 'glass' | 'primary' | 'secondary'
-- `intensity`: number (affects blur and opacity)
-- All standard HTML button attributes.

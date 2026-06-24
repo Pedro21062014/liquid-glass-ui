@@ -1,7 +1,7 @@
 {
   "name": "liquid-glass-apple-ui",
-  "version": "1.0.3",
-  "description": "Perfect Liquid Glass UI components for React inspired by Apple",
+  "version": "1.0.4",
+  "description": "Premium Liquid Glass (Glassmorphism) UI library for React inspired by Apple's design system.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -21,7 +21,7 @@
     "react-dom": "^18.2.0",
     "typescript": "^5.0.0"
   },
-  "keywords": ["glassmorphism", "liquid glass", "ui", "react", "apple"],
+  "keywords": ["glassmorphism", "liquid glass", "apple design", "ui kit", "react", "premium-ui"],
   "author": "Arena Agent",
   "license": "MIT"
 }
