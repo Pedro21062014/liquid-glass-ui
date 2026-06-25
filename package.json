@@ -1,7 +1,7 @@
 {
   "name": "liquid-glass-apple-ui",
-  "version": "1.0.5",
-  "description": "Professional Apple-grade Liquid Glass UI library. Includes physics-based interactions and high-fidelity glassmorphism.",
+  "version": "1.0.6",
+  "description": "Professional Apple-grade UI with LiquidNavBar and hold-to-grow physics.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -21,7 +21,7 @@
     "react-dom": "^18.2.0",
     "typescript": "^5.0.0"
   },
-  "keywords": ["glassmorphism", "apple design", "inspira ui", "react", "premium", "glass-ui"],
+  "keywords": ["apple-ui", "navbar", "glassmorphism", "liquid-glass", "react-ui"],
   "author": "Arena Agent",
   "license": "MIT"
 }

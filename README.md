@@ -1,76 +1,71 @@
-# 💎 Liquid Glass Apple Pro (Inspira Edition)
+# 💎 Liquid Glass Apple Pro
 
-A professional-grade UI library that captures the exact physics, aesthetics, and interaction patterns of Apple's high-end design systems.
+Professional Apple-grade UI library with physics-based interactions.
 
-## ✨ Elite Features
+## 🚀 Features
 
-- 🍎 **Physics-Based Interactions**: Buttons use custom cubic-beziers (`0.16, 1, 0.3, 1`) for that iconic "organic" Apple feel.
-- 🐚 **Apple Scale Effect**: Hold the button and watch it grow (`activeScale`), exactly like the Control Center and Apple TV icons.
-- 🔲 **Rim Lighting**: Pure CSS "inner-stroke" rim lighting on glass edges for realistic depth.
-- 🎨 **SF Pro Aesthetics**: Tuned for SF Pro typography, letter-spacing, and corner smoothing.
-- 🧊 **6 Glass Variants**: Including the new `vibrant` for high-saturation backgrounds.
-- 📱 **Haptic-Ready**: Touch-friendly events for mobile responsiveness.
+- 🐚 **Apple Scale Effect**: Hold the button and it grows (`activeScale`).
+- 🔲 **Rim Lighting**: Realistic CSS "inner-stroke" for depth.
+- 💊 **Pill-Shaped Design**: Buttons are fully rounded by default (`rounded={true}`).
+- 🧭 **LiquidNavBar**: Ready-to-use glass floating navigation bar.
 
 ## 📦 Installation
-
 ```bash
 npm install liquid-glass-apple-ui
 ```
 
-## 🚀 Pro Usage
+## 🛠 Usage
 
-### The "Apple Hold" Button
+### 1. Floating Navigation Bar
+The `LiquidNavBar` creates a floating glass pill-shaped bar. Perfect for modern landing pages.
 
 ```jsx
-import { LiquidButton } from 'liquid-glass-apple-ui';
+import { LiquidNavBar, LiquidButton } from 'liquid-glass-apple-ui';
 
-function ControlCenter() {
+function Header() {
   return (
-    <LiquidButton 
-      variant="chrome" 
-      color="white" 
-      activeScale={1.1} // Grows significantly when held
-      glow
-    >
-      <FlashlightIcon />
-    </LiquidButton>
+    <LiquidNavBar variant="vibrant" color="white">
+      <div style={{ fontWeight: 'bold' }}>Logo</div>
+      <div style={{ display: 'flex', gap: '8px' }}>
+        <LiquidButton variant="ghost" size="sm">Home</LiquidButton>
+        <LiquidButton variant="ghost" size="sm">About</LiquidButton>
+      </div>
+      <LiquidButton variant="solid" color="black" size="sm">
+        Connect
+      </LiquidButton>
+    </LiquidNavBar>
   );
 }
 ```
 
-### Pro Containers
+### 2. Pro Buttons (Hold-to-Grow)
+Buttons are rounded by default. Use `activeScale` to control the growth effect when held.
 
 ```jsx
-import { LiquidGlass } from 'liquid-glass-apple-ui';
+import { LiquidButton } from 'liquid-glass-apple-ui';
 
-const Widget = () => (
-  <LiquidGlass 
-    variant="vibrant" 
-    color="blue" 
-    shadow="apple"
-    borderRadius={32}
-  >
-    <div style={{ padding: 24 }}>
-      <h3>Vibrant Content</h3>
-    </div>
-  </LiquidGlass>
-);
+<LiquidButton 
+  variant="chrome" 
+  activeScale={1.15} // Professional growth effect
+  glow
+>
+  Click & Hold Me
+</LiquidButton>
 ```
 
-## 🛠 Advanced API
+## 🛠 API
 
-### `<LiquidGlass />`
-- `variant`: `ultra-thin` | `thin` | `normal` | `thick` | `chrome` | `vibrant`
-- `shadow`: `none` | `sm` | `md` | `lg` | `apple`
-- `border`: `boolean` (Adds the rim-light effect)
+### `<LiquidNavBar />`
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `variant` | `GlassVariant` | `thin` | Glass thickness |
+| `fixed` | `boolean` | `true` | If true, floats at top of screen |
 
 ### `<LiquidButton />`
-- `activeScale`: `number` (Default: `1.05`. The growth factor when the button is held/pressed)
-- `variant`: `GlassVariant` | `solid` | `ghost`
-- `size`: `xs` | `sm` | `md` | `lg` | `xl`
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `rounded` | `boolean` | `true` | Makes button pill-shaped |
+| `activeScale` | `number` | `1.05` | Scale factor on hold/press |
 
-## 🎨 Design Principles
-This library follows the **Apple Human Interface Guidelines**:
-1. **Materiality**: Using background blur to provide context.
-2. **Responsiveness**: Immediate visual feedback on touch/click.
-3. **Continuity**: Smooth transitions between states.
+### `<LiquidGlass />` (Core Component)
+- Use this to wrap any div to give it the apple glass effect.

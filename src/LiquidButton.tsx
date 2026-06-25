@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { LiquidGlass, GlassVariant, GlassColor } from './LiquidGlass';
 
 interface LiquidButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -6,7 +6,8 @@ interface LiquidButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement
   color?: GlassColor;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   glow?: boolean;
-  activeScale?: number; // How much it grows on hold
+  activeScale?: number;
+  rounded?: boolean; // New prop for fully rounded buttons
 }
 
 export const LiquidButton: React.FC<LiquidButtonProps> = ({
@@ -16,6 +17,7 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
   size = 'md',
   glow = false,
   activeScale = 1.05,
+  rounded = true, // Default to true for that Apple look
   style,
   className = '',
   ...props
@@ -24,16 +26,17 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   
   const sizes = {
-    xs: { padding: '6px 12px', fontSize: '12px', borderRadius: '10px' },
-    sm: { padding: '8px 16px', fontSize: '14px', borderRadius: '12px' },
-    md: { padding: '12px 24px', fontSize: '16px', borderRadius: '16px' },
-    lg: { padding: '16px 32px', fontSize: '18px', borderRadius: '18px' },
-    xl: { padding: '20px 44px', fontSize: '20px', borderRadius: '22px' },
+    xs: { padding: '6px 14px', fontSize: '12px' },
+    sm: { padding: '8px 18px', fontSize: '14px' },
+    md: { padding: '12px 26px', fontSize: '16px' },
+    lg: { padding: '16px 36px', fontSize: '18px' },
+    xl: { padding: '20px 50px', fontSize: '20px' },
   };
 
   const currentSize = sizes[size];
   const isSolid = variant === 'solid';
   const isGhost = variant === 'ghost';
+  const finalBorderRadius = rounded ? '999px' : (size === 'xl' ? '22px' : '16px');
 
   const getColorValue = (c: GlassColor) => {
     const values = { white: '255,255,255', black: '0,0,0', blue: '0,122,255', purple: '175,82,222', gold: '255,159,10', rose: '255,45,85' };
@@ -42,21 +45,19 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
 
   const baseButtonStyle: React.CSSProperties = {
     ...currentSize,
+    borderRadius: finalBorderRadius,
     border: 'none',
     outline: 'none',
     cursor: 'pointer',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
     fontWeight: 600,
-    letterSpacing: '-0.02em',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '8px',
     userSelect: 'none',
     WebkitTapHighlightColor: 'transparent',
-    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+    transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
     transform: isPressed ? `scale(${activeScale})` : (isHovered ? 'scale(1.02)' : 'scale(1)'),
-    filter: isPressed ? 'brightness(0.9)' : 'none',
     position: 'relative',
     ...style,
   };
@@ -75,15 +76,7 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
         color: color === 'white' ? '#fff' : `rgb(${getColorValue(color)})`,
       };
     }
-    return {}; // Handled by LiquidGlass wrapper
-  };
-
-  const handleMouseDown = () => setIsPressed(true);
-  const handleMouseUp = () => setIsPressed(false);
-  const handleMouseEnter = () => setIsHovered(true);
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setIsPressed(false);
+    return {};
   };
 
   const buttonContent = (
@@ -94,12 +87,10 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
         ...getVariantStyles(),
         background: isSolid || isGhost ? (getVariantStyles().backgroundColor) : 'transparent',
       }}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onTouchStart={handleMouseDown}
-      onTouchEnd={handleMouseUp}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => { setIsHovered(false); setIsPressed(false); }}
     >
       {children}
     </button>
@@ -111,7 +102,7 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
     <LiquidGlass
       variant={variant as GlassVariant}
       color={color}
-      borderRadius={currentSize.borderRadius}
+      borderRadius={finalBorderRadius}
       shadow={isHovered ? 'lg' : 'apple'}
       style={{
         display: 'inline-flex',

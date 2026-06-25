@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 export type GlassVariant = 'ultra-thin' | 'thin' | 'normal' | 'thick' | 'chrome' | 'vibrant';
 export type GlassColor = 'white' | 'black' | 'blue' | 'purple' | 'gold' | 'rose';
@@ -62,7 +62,7 @@ export const LiquidGlass: React.FC<LiquidGlassProps> = ({
       WebkitBackdropFilter: `blur(${config.blur}px) saturate(${config.saturate}%) brightness(${config.brightness})`,
       backgroundColor: `rgba(${baseColor}, ${finalOpacity})`,
       borderRadius: typeof borderRadius === 'number' ? `${borderRadius}px` : borderRadius,
-      border: border ? `1px solid rgba(${color === 'black' ? '255,255,255' : '255,255,255'}, ${color === 'black' ? 0.1 : 0.25})` : 'none',
+      border: border ? `1px solid rgba(255, 255, 255, ${color === 'black' ? 0.1 : 0.25})` : 'none',
       boxShadow: shadows[shadow],
       transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
       overflow: 'hidden',
@@ -72,7 +72,6 @@ export const LiquidGlass: React.FC<LiquidGlassProps> = ({
 
   return (
     <div style={glassStyles} className={`liquid-glass ${className}`} {...props}>
-      {/* Dynamic Inner Highlight (Apple-like rim light) */}
       {border && (
         <div style={{
           position: 'absolute',
@@ -87,6 +86,43 @@ export const LiquidGlass: React.FC<LiquidGlassProps> = ({
         }} />
       )}
       <div style={{ position: 'relative', zIndex: 1 }}>{children}</div>
+    </div>
+  );
+};
+
+export const LiquidNavBar: React.FC<{ 
+  children: React.ReactNode; 
+  variant?: GlassVariant;
+  color?: GlassColor;
+  className?: string;
+  fixed?: boolean;
+}> = ({ children, variant = 'thin', color = 'white', className = '', fixed = true }) => {
+  return (
+    <div style={{
+      position: fixed ? 'fixed' : 'relative',
+      top: fixed ? '20px' : '0',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      zIndex: 1000,
+      width: 'auto',
+      minWidth: '300px',
+      maxWidth: '90vw'
+    }} className={className}>
+      <LiquidGlass 
+        variant={variant} 
+        color={color} 
+        borderRadius="999px" 
+        style={{ padding: '8px 20px' }}
+      >
+        <nav style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'space-between', 
+          gap: '20px' 
+        }}>
+          {children}
+        </nav>
+      </LiquidGlass>
     </div>
   );
 };
